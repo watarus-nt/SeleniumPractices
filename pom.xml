@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>SeleniumPractices</groupId>
+    <artifactId>SeleniumPractices</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <selenium.version>3.4.0</selenium.version>
+        <testng.version>6.9.10</testng.version>
+        <surefire.version>2.20</surefire.version>
+        <failsafe.version>2.20</failsafe.version>
+        <maven.compiler.version>3.6.2</maven.compiler.version>
+        <skipTests>false</skipTests>
+        <skipITs>${skipTests}</skipITs>
+        <skipUTs>${skipTests}</skipUTs>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.18</version>
+        </dependency>
+        <dependency>
+            <groupId>org.fluttercode.datafactory</groupId>
+            <artifactId>datafactory</artifactId>
+            <version>0.8</version>
+            <type>jar</type>
+            <!--http://www.andygibson.net/blog/article/generate-test-data-with-datafactory/ -->
+        </dependency>
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>0.13</version>
+            <!--https://github.com/DiUS/java-faker-->
+            <!--http://dius.github.io/java-faker/apidocs/index.html-->
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.16</version>
+                <configuration>
+                    <skipTests>${skipUTs}</skipTests>
+                    <properties>
+                        <property>
+                            <name>usedefaultlisteners</name>
+                            <value>false</value> <!-- disabling default listeners is optional -->
+                        </property>
+                        <property>
+                            <name>listener</name>
+                            <value>utils.Listeners.TestNGCustom</value>
+                        </property>
+                    </properties>
+                </configuration>
+            </plugin>
+            <!-- <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-failsafe-plugin</artifactId>
+                 <version>${failsafe.version}</version>
+                <configuration>
+                     <skipTests>${skipTests}</skipTests>
+                     <skipITs>${skipITs}</skipITs>
+                 </configuration>
+                 <executions>
+                     <execution>
+                         <goals>
+                             <goal>integration-test</goal>
+                             <goal>verify</goal>
+                         </goals>
+                     </execution>
+                 </executions>
+             </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
