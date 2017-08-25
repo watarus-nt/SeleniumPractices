@@ -44,7 +44,7 @@ public class ProductValidationSingleProduct {
             String currentProduct = "Current Product: " + getProductName();
             seleniumKeywords.assertTrue(driver.getCurrentUrl().contains(getProductUrl()));
             seleniumKeywords.assertEquals(seleniumKeywords.getText(By.className("category-title")), productName);
-            seleniumKeywords.assertEquals(seleniumKeywords.getText(By.className("content")), productDescription + "w");
+            seleniumKeywords.assertEquals(seleniumKeywords.getText(By.className("content")), "w" + productDescription);
             seleniumKeywords.assertTrue(seleniumKeywords.getText(By.className("price-tag")).contains(productPrice));
         } catch (Exception ex) {
             DriverBase.log.fail("Method verifyAttributesOnPage failed!\n" + ex.getMessage());
