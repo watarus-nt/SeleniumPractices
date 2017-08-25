@@ -22,7 +22,7 @@ public class CookieExamples extends DriverBase {
         seleniumKeywords = new SeleniumKeywords(this.getDriver());
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         CookieExamples cookieExamples = new CookieExamples();
         WebDriver driver = cookieExamples.getDriver();
 
@@ -66,7 +66,7 @@ public class CookieExamples extends DriverBase {
 
     }
 
-    public boolean loginGoogle(WebDriver driver) {
+    public boolean loginGoogle(WebDriver driver) throws Exception {
         seleniumKeywords.open_Url("http://www.google.com/ncr");
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -107,7 +107,7 @@ public class CookieExamples extends DriverBase {
         return _result;
     }
 
-    public boolean loginFacebook(WebDriver driver) {
+    public boolean loginFacebook(WebDriver driver) throws Exception {
 //        zgeeper0306@gmail.com; 123456@X
         seleniumKeywords.open_Url("http://www.facebook.com");
         driver.findElement(By.name("email")).sendKeys("wgeeper0305@gmail.com");
@@ -125,7 +125,7 @@ public class CookieExamples extends DriverBase {
         return _result;
     }
 
-    public boolean loginPacktpub(WebDriver driver) {
+    public boolean loginPacktpub(WebDriver driver) throws Exception {
 //        zgeeper0306@gmail.com; 123456@X
         String username = "watarus.nt@gmail.com";
         String password = "vienhWpackttel1";

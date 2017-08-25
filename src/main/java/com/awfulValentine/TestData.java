@@ -2,9 +2,11 @@ package com.awfulValentine;
 
 import com.github.javafaker.Faker;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class TestData {
 
@@ -33,6 +35,33 @@ public class TestData {
 
     public static String getRating() {
         return String.valueOf(faker.number().numberBetween(1, 5));
+    }
+
+    public static String getCreditCardNumber() {
+        String number = faker.finance().creditCard();
+        if (number.contains("-")) {
+            number = number.replace("-", "");
+        }
+        return number;
+    }
+
+    private static Calendar futureCalendar() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(faker.date().future(2000, TimeUnit.DAYS));
+        return cal;
+    }
+
+    public static String getDayInFuture() {
+        return String.valueOf(futureCalendar().get(Calendar.DAY_OF_WEEK_IN_MONTH));
+    }
+
+    public static String getMonthInFuture() {
+        return String.valueOf(futureCalendar().get(Calendar.MONTH));
+    }
+
+    public static String getYearInFuture() {
+
+        return String.valueOf(futureCalendar().get(Calendar.YEAR));
     }
 
     public static String getBuzzword() {
@@ -76,7 +105,17 @@ public class TestData {
 
 
     public static void main(String[] args) {
-        System.out.println(getFixtureVariable("fixture_1", "name"));
+        for (int i = 0; i < 100; i++) {
+            System.out.println("-----------------------------------------");
+            System.out.println(faker.business().creditCardNumber());
+            System.out.println(faker.business().creditCardExpiry());
+            System.out.println(faker.business().creditCardType());
+/*            System.out.println(getCreditCardNumber());
+            System.out.println(getDayInFuture() + "/" + getMonthInFuture() + "/" + getYearInFuture());*/
+
+
+        }
+
     }
 
 }

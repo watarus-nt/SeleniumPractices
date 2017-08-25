@@ -43,13 +43,6 @@
             <version>1.18</version>
         </dependency>
         <dependency>
-            <groupId>org.fluttercode.datafactory</groupId>
-            <artifactId>datafactory</artifactId>
-            <version>0.8</version>
-            <type>jar</type>
-            <!--http://www.andygibson.net/blog/article/generate-test-data-with-datafactory/ -->
-        </dependency>
-        <dependency>
             <groupId>com.github.javafaker</groupId>
             <artifactId>javafaker</artifactId>
             <version>0.13</version>
@@ -81,6 +74,9 @@
                 <version>2.16</version>
                 <configuration>
                     <skipTests>${skipUTs}</skipTests>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
                     <properties>
                         <property>
                             <name>usedefaultlisteners</name>

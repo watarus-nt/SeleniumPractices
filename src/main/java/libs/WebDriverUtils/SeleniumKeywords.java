@@ -26,9 +26,48 @@ public class SeleniumKeywords extends DriverBase {
         wait = new WebDriverWait(driver, 10);
     }
 
-    public void open_Url(String url) {
-        driver.manage().window().maximize();
-        driver.get(url);
+    public void open_Url(String url) throws Exception {
+        log.info("Starting keyword open_Url with input: \"" + url + "\"");
+        try {
+            driver.manage().window().maximize();
+            driver.get(url);
+            verifyCurrentUrlContains(url);
+            log.info("[PASSED] - open_Url ran succesfully!");
+        } catch (Exception ex) {
+            log.fail("[FAILED] - open_Url ran unsuccesfully! Exception occurs\n" + ex);
+            throw ex;
+        }
+    }
+
+    public void verifyCurrentUrlContains(String urlText) throws Exception {
+        log.info("Starting verifyCurrentUrlContains keyword with input urlText = \""
+                + urlText + "\"");
+        try {
+            wait.until(ExpectedConditions.urlContains(urlText));
+            if (driver.getCurrentUrl().contains(urlText)) {
+                log.info("[PASSED] - verifyCurrentUrlContains - Current URL contains input URL!");
+            } else {
+                throw new Exception("[FAILED] - verifyCurrentUrlContains - Current URL doesn't contain input URL!");
+            }
+        } catch (Exception ex) {
+            log.fail("[FAILED] - verifyCurrentUrlContains - Exception occurs: " + ex);
+            throw ex;
+        }
+    }
+
+    public void verifyCurrentUrlEquals(String urlText) throws Exception {
+        log.info("Starting verifyCurrentUrlEquals keyword with input urlText = \""
+                + urlText + "\"");
+        try {
+            if (driver.getCurrentUrl().equals(urlText)) {
+                log.info("[PASSED] - verifyCurrentUrlEquals - Current URL contains input URL!");
+            } else {
+                throw new Exception("[FAILED] - verifyCurrentUrlEquals - Current URL doesn't contain input URL!");
+            }
+        } catch (Exception ex) {
+            log.fail("[FAILED] - verifyCurrentUrlEquals - Exception occurs: " + ex);
+            throw ex;
+        }
     }
 
     public Boolean checkUrlContains(String expectedString) {
@@ -38,7 +77,7 @@ public class SeleniumKeywords extends DriverBase {
     public WebElement find_Element(By elementLocator) {
         WebElement returnElement = null;
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(elementLocator));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(elementLocator));
             returnElement = driver.findElement(elementLocator);
             log.info("[PASSED] - find_Element - find element successfully!");
         } catch (Exception ex) {
@@ -47,15 +86,16 @@ public class SeleniumKeywords extends DriverBase {
         return returnElement;
     }
 
-    public void click(By elementLocator) {
+    public void click(By elementLocator) throws Exception {
+        log.info("Starting keyword click with input: \"" + elementLocator + "\"");
         try {
             WebElement element = find_Element(elementLocator);
             wait.until(ExpectedConditions.elementToBeClickable(element));
             element.click();
             log.info("[PASSED] - click - Clicked to element!");
         } catch (Exception ex) {
-            log.fail("[FAILED] - click - Unable to click to element!");
-            ex.printStackTrace();
+            log.fail("[FAILED] - click - Unable to click to element! Exception occur: \n" + ex);
+            throw ex;
         }
     }
 
@@ -83,10 +123,17 @@ public class SeleniumKeywords extends DriverBase {
         element.submit();
     }
 
-    public void type_Text(By elementLocator, String text) {
-        WebElement textBox = find_Element(elementLocator);
-        textBox.clear();
-        textBox.sendKeys(text);
+    public void type_Text(By elementLocator, String text) throws Exception {
+        log.info("Starting keyword type_Text with input: \"" + text + "\"");
+        try {
+            WebElement textBox = find_Element(elementLocator);
+            textBox.clear();
+            textBox.sendKeys(text);
+            log.info("[PASSED] - type_Text - Type text succesfully!");
+        } catch (Exception ex) {
+            log.fail("[FAILED] - type_Text - Exception occur: \n" + ex);
+            throw ex;
+        }
     }
 
 
@@ -129,7 +176,7 @@ public class SeleniumKeywords extends DriverBase {
     public String getText(By elementLocator) {
         String elementText = null;
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(elementLocator));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(elementLocator));
             log.info("getText - input element locator is: \"" + elementLocator + "\"");
             elementText = find_Element(elementLocator).getText();
             log.info("[PASSED] - getText - Element text is : \"" + elementText + "\"");
@@ -178,4 +225,14 @@ public class SeleniumKeywords extends DriverBase {
             throw ex;
         }
     }
+
+    public WebDriverWait getWait() {
+        return wait;
+    }
+
+    public void setWait(WebDriverWait wait) {
+        this.wait = wait;
+    }
+
+
 }

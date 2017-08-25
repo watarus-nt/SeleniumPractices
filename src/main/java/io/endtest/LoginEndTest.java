@@ -23,7 +23,7 @@ public class LoginEndTest extends DriverBase {
         seleniumKeywords = new SeleniumKeywords(this.getDriver());
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         LoginEndTest loginEndTest = new LoginEndTest();
         WebDriver driver = loginEndTest.getDriver();
         for (String s : loginEndTest.getActionList(driver)) {
@@ -33,11 +33,11 @@ public class LoginEndTest extends DriverBase {
         driver.quit();
     }
 
-    private void openHomePage() {
+    private void openHomePage() throws Exception {
         seleniumKeywords.open_Url(homePageUrl);
     }
 
-    private void userLogin() {
+    private void userLogin() throws Exception {
         seleniumKeywords.click(By.id("loginLink"));
         seleniumKeywords.type_Text(By.id("userEmailLoginInput"), userEmail);
         seleniumKeywords.type_Text(By.id("userPasswordLoginInput"), userPassword);
@@ -58,20 +58,20 @@ public class LoginEndTest extends DriverBase {
         }
     }
 
-    private void editTestSuit(WebDriver driver) {
+    private void editTestSuit(WebDriver driver) throws Exception {
         seleniumKeywords.click(By.id("editTestSuiteButton"));
         seleniumKeywords.waitForElementToBePresent(By.id("headerCases"));
 
     }
 
-    private void editTestCase(WebDriver driver, int testCaseID) {
+    private void editTestCase(WebDriver driver, int testCaseID) throws Exception {
         By editTestCaseButtonXpathLocator = By.xpath(".//div[contains(@id, 'c') and @class='cases']["
                 + testCaseID + "]/div[last()]");
         seleniumKeywords.click(editTestCaseButtonXpathLocator);
         seleniumKeywords.waitForElementToBePresent(By.name("stepDragButton"));
     }
 
-    public List<String> getActionList(WebDriver driver) {
+    public List<String> getActionList(WebDriver driver) throws Exception {
         openHomePage();
         userLogin();
         editTestSuit(driver);

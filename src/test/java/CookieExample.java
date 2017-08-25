@@ -17,19 +17,19 @@ public class CookieExample {
 
 
     @Test
-    public void testLoginGoogle() {
+    public void testLoginGoogle() throws Exception {
         cookieExamples.loginGoogle(this.driver);
 
     }
 
     @Test
-    public void testLoginFacebook() {
+    public void testLoginFacebook() throws Exception {
         cookieExamples.loginFacebook(this.driver);
 
     }
 
     @Test
-    public void testLoginPackpubt() {
+    public void testLoginPackpubt() throws Exception {
         cookieExamples.loginPacktpub(this.driver);
 
     }

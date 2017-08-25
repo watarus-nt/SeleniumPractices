@@ -68,14 +68,14 @@ public class ProductReview {
         driver.get(url);
     }
 
-    private void openDesiredProductInfo(WebDriver driver, String XpathAddress) {
+    private void openDesiredProductInfo(WebDriver driver, String XpathAddress) throws Exception {
         DriverBase.log.info("Running openDesiredProductInfo method");
         DriverBase.log.info("Input XpathAddress = " + XpathAddress);
         By productInfoLocator = By.xpath(XpathAddress);
         seleniumKeywords.click(productInfoLocator);
     }
 
-    public void openProductPage(WebDriver driver) {
+    public void openProductPage(WebDriver driver) throws Exception {
         DriverBase.log.info("Running openProductPage method");
         navigateToHomePage(driver);
 
@@ -85,7 +85,7 @@ public class ProductReview {
         openDesiredProductInfo(driver, productXpath);
     }
 
-    public void postComment(WebDriver driver) {
+    public void postComment(WebDriver driver) throws Exception {
         openProductPage(driver);
         initialCommentDetails();
 
@@ -93,7 +93,7 @@ public class ProductReview {
 
     }
 
-    public void postCommentTwice(WebDriver driver) {
+    public void postCommentTwice(WebDriver driver) throws Exception {
         openProductPage(driver);
         initialCommentDetails();
 
@@ -103,7 +103,7 @@ public class ProductReview {
         fill_To_Form();
     }
 
-    private void fill_To_Form() {
+    private void fill_To_Form() throws Exception {
         seleniumKeywords.type_Text(By.name("author"), getNameText());
 
         seleniumKeywords.type_Text(By.name("email"), getEmailText());

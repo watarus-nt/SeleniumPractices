@@ -32,7 +32,7 @@ public class ProductValidationSingleProduct {
         log.info("PASSED - Verification succesfully!");
     }
 
-    private void select_desired_product_on_Homepage(WebDriver driver) {
+    private void select_desired_product_on_Homepage(WebDriver driver) throws Exception {
         String url = TestData.getBaseUrl() + "/" + getProductUrl();
         seleniumKeywords.open_Url(url);
     }
