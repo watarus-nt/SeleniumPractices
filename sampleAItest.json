@@ -1,5 +1,4 @@
-[
-  {
+{
     "browser": "Firefox",
     "URL": "https://www.amazon.com/",
     "testsuite": {
@@ -104,6 +103,3 @@
       ]
     }
   }
-]
- 
-
