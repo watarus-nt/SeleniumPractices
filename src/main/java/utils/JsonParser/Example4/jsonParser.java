@@ -1,4 +1,4 @@
-package utils.JsonParser;
+package utils.JsonParser.Example4;
 
 import com.google.gson.Gson;
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class jsonParser {
     public static void main(String[] args) throws Exception {
         Gson gson = new Gson();
-        TestParamsDTO[] myTypes = gson.fromJson(new FileReader("sampleAItest.json"), TestParamsDTO[].class);
+        TestParamsJson[] myTypes = gson.fromJson(new FileReader("sampleAItest.json"), TestParamsJson[].class);
         System.out.println(gson.toJson(myTypes));
         System.out.println();
         System.out.println();
@@ -16,30 +16,30 @@ public class jsonParser {
     }
 }
 
-class TestParamsDTO {
+class TestParamsJson {
     String browser;
     String URL;
-    testSuiteDTO testsuite;
+    testSuiteJson testsuite;
 }
 
-class testSuiteDTO {
+class testSuiteJson {
     String name;
-    ArrayList<testCaseDTO> testcase;
+    ArrayList<testCaseJson> testcase;
 }
 
-class testCaseDTO {
+class testCaseJson {
     String name;
-    ArrayList<testStepDTO> step;
+    ArrayList<testStepJson> step;
 }
 
-class testStepDTO {
+class testStepJson {
     String name;
     String action;
     String texttoWrite;
-    locateElementDTO locateElement;
+    locateElementJson locateElement;
 }
 
-class locateElementDTO {
+class locateElementJson {
     String by;
     String value;
 }

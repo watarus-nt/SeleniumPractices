@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Foo {
     public static void main(String[] args) throws Exception {
         Gson gson = new Gson();
-        TypeDTO[] myTypes = gson.fromJson(new FileReader("input.json"), TypeDTO[].class);
+        TypeDTO[] myTypes = gson.fromJson(new FileReader("src/main/java/utils/JsonParser/Example2/input.json"), TypeDTO[].class);
         System.out.println(gson.toJson(myTypes));
     }
 }

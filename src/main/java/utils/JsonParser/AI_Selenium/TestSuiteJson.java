@@ -1,4 +1,4 @@
-package utils.JsonParser;
+package utils.JsonParser.AI_Selenium;
 
 public class TestSuiteJson {
     private String name;

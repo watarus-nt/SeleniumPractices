@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Foo2 {
     public static void main(String[] args) throws Exception {
         Gson gson = new Gson();
-        TypeDTO2[] myTypes = gson.fromJson(new FileReader("input2.json"), TypeDTO2[].class);
+        TypeDTO2[] myTypes = gson.fromJson(new FileReader("src/main/java/utils/JsonParser/Example2/input2.json"), TypeDTO2[].class);
         System.out.println(gson.toJson(myTypes));
     }
 }

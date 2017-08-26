@@ -1,4 +1,4 @@
-package utils.JsonParser;
+package utils.JsonParser.AI_Selenium;
 
 public class LocateElementJson {
     private String by;
