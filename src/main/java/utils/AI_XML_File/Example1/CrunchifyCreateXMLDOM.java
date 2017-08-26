@@ -1,4 +1,4 @@
-package utils.XML_utils.Example1;
+package utils.AI_XML_File.Example1;
 
 /**
  * Created by WataruS on 8/26/2017.

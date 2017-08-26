@@ -1,4 +1,4 @@
-package utils.XML_utils;
+package utils.AI_XML_File;
 
 import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
@@ -53,7 +53,6 @@ public class WriteTestXML {
         //Get testcases list
         for (int i = 0; i < parser.getNumberOfTestCases(); i++) {
             String testName = parser.getTestCaseName(parser.getTestCaseDTO()[i]);
-            testCaseName.add(testName);
             testCaseName.add(testName + "Test");
         }
     }
@@ -62,8 +61,9 @@ public class WriteTestXML {
 
         // create folder to store test xml file under working directory
         setTestSuiteFolderName("testSuite/" + getTestSuiteName()
-                + "_" + Utility.getDate()
-                + "_" + Utility.getTime());
+//                + "_" + Utility.getDate()
+//                + "_" + Utility.getTime()
+        );
         Utility.createFolder("testSuite");
         Utility.createFolder(getTestSuiteFolderName());
 
@@ -99,7 +99,7 @@ public class WriteTestXML {
             Element testElement = doc.createElement("test");
             testElement.setAttribute("name", test);
             testElement.setAttribute("preserve-order", "true");
-            addClassName(testElement, test + "Test");
+            addClassName(testElement, test);
             rootElement.appendChild(testElement);
         }
     }

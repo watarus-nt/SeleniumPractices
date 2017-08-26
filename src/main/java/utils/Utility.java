@@ -6,6 +6,7 @@ import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class Utility {
 
@@ -128,5 +129,30 @@ public class Utility {
         DateFormat dateFormat = new SimpleDateFormat("HHmmss");
         Date date = new Date();
         return dateFormat.format(date);
+    }
+
+    public static void writeToFile(List<String> content, String filename, Boolean overwriteFlag){
+        File file = new File(filename);
+        // if file doesnt exists, then create it
+        if (overwriteFlag) {
+            try {
+                file.createNewFile();
+                FileWriter fw = null;
+                try {
+                    fw = new FileWriter(file.getAbsoluteFile());
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    for (String line : content) {
+                        bw.write(line);
+                        bw.newLine();
+                    }
+                    bw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Done");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
