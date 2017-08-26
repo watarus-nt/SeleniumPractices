@@ -1,8 +1,8 @@
 package utils.XML_utils;
 
+import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Text;
 import utils.JsonParser.AI_Selenium.AI_Parser;
 import utils.Utility;
 
@@ -13,7 +13,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +25,7 @@ public class WriteTestXML {
     private List<String> testCaseName = new ArrayList<String>();
     private String testSuiteFolderName;
     private String testClassFolderName;
+    private String testNgXmlPath;
     private Document doc;
 
     public WriteTestXML() {
@@ -66,6 +67,9 @@ public class WriteTestXML {
         Utility.createFolder("testSuite");
         Utility.createFolder(getTestSuiteFolderName());
 
+        // set a path of output testng.xml file (will rename as ai.xml)
+        setTestNgXmlPath(getTestSuiteFolderName() + "/ai.xml");
+
         // create folder to store test class .java file under src/test/java
         setTestClassFolderName( "src/test/java/" + getTestSuiteName() );
         Utility.createFolder(getTestClassFolderName());
@@ -94,7 +98,7 @@ public class WriteTestXML {
         for (String test:getTestCaseName()){
             Element testElement = doc.createElement("test");
             testElement.setAttribute("name", test);
-            testElement.setAttribute("preserver-order", "true");
+            testElement.setAttribute("preserve-order", "true");
             addClassName(testElement, test + "Test");
             rootElement.appendChild(testElement);
         }
@@ -108,23 +112,30 @@ public class WriteTestXML {
         testElement.appendChild(classesElement);
     }
 
-    public void writeToFile() throws TransformerException {
+    public void writeToFile() throws TransformerException, IOException {
+        StringWriter outputXmlStringWriter = new StringWriter();
+
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
         DOMSource source = new DOMSource(this.doc);
-        StreamResult result = new StreamResult(new File(getTestSuiteFolderName() + "/ai.xml"));
-
+//        StreamResult result = new StreamResult(new File(getTestSuiteFolderName() + "/ai.xml"));
         // Output to console for testing
         // StreamResult result = new StreamResult(System.out);
 
-        transformer.transform(source, result);
+        transformer.transform(source, new StreamResult(outputXmlStringWriter));
+        String outputXmlString = outputXmlStringWriter.toString()
+                .replaceFirst("<!--", "\n<").replaceFirst("-->", ">\n");
+
+
+        FileOutputStream outputXml = new FileOutputStream(new File(getTestNgXmlPath()));
+        outputXml.write(outputXmlString.getBytes("UTF-8"));
 
         System.out.println("File saved!");
     }
 
     public void addDocType() {
 //        rootElement.appendChild(doc.createTextNode("!DOCTYPE suite SYSTEM \"http://testng.org/testng-1.0.dtd\""));
-        Text textDTD = doc.createTextNode("!DOCTYPE suite SYSTEM \"http://testng.org/testng-1.0.dtd\"");
+        Comment textDTD = doc.createComment("!DOCTYPE suite SYSTEM \"http://testng.org/testng-1.0.dtd\"");
         doc.appendChild(textDTD);
     }
 
@@ -158,5 +169,13 @@ public class WriteTestXML {
 
     public void setTestClassFolderName(String testClassFolderName) {
         this.testClassFolderName = testClassFolderName;
+    }
+
+    public String getTestNgXmlPath() {
+        return testNgXmlPath;
+    }
+
+    public void setTestNgXmlPath(String testNgXmlPath) {
+        this.testNgXmlPath = testNgXmlPath;
     }
 }
