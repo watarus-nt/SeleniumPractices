@@ -1,7 +1,8 @@
-package utils.XML_utils.AI_testNG_xml;
+package utils.XML_utils;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Text;
 import utils.JsonParser.AI_Selenium.AI_Parser;
 import utils.Utility;
 
@@ -74,11 +75,13 @@ public class WriteTestXML {
     public void createXml() throws Exception {
         getInfoFromJson();
         createFolders();
+        addDocType();
         this.doc.appendChild(addSuiteRootElement());
     }
 
     public Element addSuiteRootElement() {
         Element rootElement = doc.createElement("suite");
+
         rootElement.setAttribute("name", getTestSuiteName());
         rootElement.setAttribute("verbose", "2");
 
@@ -119,8 +122,10 @@ public class WriteTestXML {
         System.out.println("File saved!");
     }
 
-    public void addDocType(Document doc) {
-        doc.setTextContent("!DOCTYPE suite SYSTEM \"http://testng.org/testng-1.0.dtd\"");
+    public void addDocType() {
+//        rootElement.appendChild(doc.createTextNode("!DOCTYPE suite SYSTEM \"http://testng.org/testng-1.0.dtd\""));
+        Text textDTD = doc.createTextNode("!DOCTYPE suite SYSTEM \"http://testng.org/testng-1.0.dtd\"");
+        doc.appendChild(textDTD);
     }
 
     public String getTestSuiteName() {
