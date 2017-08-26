@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Companies xmlns="http://crunchify.com/CrunchifyCreateXMLDOM">
+    <Company id="1">
+        <Name>Paypal</Name>
+        <Type>Payment</Type>
+        <Employees>1000</Employees>
+    </Company>
+    <Company id="2">
+        <Name>eBay</Name>
+        <Type>Shopping</Type>
+        <Employees>2000</Employees>
+    </Company>
+    <Company id="3">
+        <Name>Google</Name>
+        <Type>Search</Type>
+        <Employees>3000</Employees>
+    </Company>
+</Companies>

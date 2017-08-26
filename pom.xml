@@ -17,6 +17,7 @@
         <skipTests>false</skipTests>
         <skipITs>${skipTests}</skipITs>
         <skipUTs>${skipTests}</skipUTs>
+        <testSuiteXML>testng.xml</testSuiteXML>
     </properties>
 
     <dependencies>
@@ -79,7 +80,7 @@
                 <configuration>
                     <skipTests>${skipUTs}</skipTests>
                     <suiteXmlFiles>
-                        <!--<suiteXmlFile>testng.xml</suiteXmlFile>-->
+                        <suiteXmlFile>${testSuiteXML}</suiteXmlFile>
                     </suiteXmlFiles>
                     <properties>
                         <property>

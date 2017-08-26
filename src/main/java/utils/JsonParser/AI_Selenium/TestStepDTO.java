@@ -1,9 +1,9 @@
 package utils.JsonParser.AI_Selenium;
 
-public class TestStepJson {
+public class TestStepDTO {
     private String name;
     private String action;
-    private LocateElementJson locateElement;
+    private LocateElementDTO locateElement;
     private String texttoWrite;
 
     @Override
@@ -31,11 +31,11 @@ public class TestStepJson {
         this.action = action;
     }
 
-    public LocateElementJson getLocateElement() {
+    public LocateElementDTO getLocateElement() {
         return locateElement;
     }
 
-    public void setLocateElement(LocateElementJson locateElement) {
+    public void setLocateElement(LocateElementDTO locateElement) {
         this.locateElement = locateElement;
     }
 

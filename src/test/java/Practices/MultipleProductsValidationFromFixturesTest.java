@@ -1,3 +1,5 @@
+package Practices;
+
 import com.awfulValentine.ProductValidationSingleProduct;
 import com.awfulValentine.TestData;
 import libs.WebDriverUtils.SeleniumKeywords;

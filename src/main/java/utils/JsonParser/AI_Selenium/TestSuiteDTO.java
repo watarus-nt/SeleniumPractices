@@ -1,9 +1,9 @@
 package utils.JsonParser.AI_Selenium;
 
-public class TestSuiteJson {
+public class TestSuiteDTO {
     private String name;
 
-    private TestCaseJson[] testcase;
+    private TestCaseDTO[] testcase;
 
     @Override
     public String toString() {
@@ -19,11 +19,11 @@ public class TestSuiteJson {
         this.name = name;
     }
 
-    public TestCaseJson[] getTestcase() {
+    public TestCaseDTO[] getTestcase() {
         return testcase;
     }
 
-    public void setTestcase(TestCaseJson[] testcase) {
+    public void setTestcase(TestCaseDTO[] testcase) {
         this.testcase = testcase;
     }
 }

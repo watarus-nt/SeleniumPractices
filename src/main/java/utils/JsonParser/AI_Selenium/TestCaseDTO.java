@@ -1,8 +1,8 @@
 package utils.JsonParser.AI_Selenium;
 
-public class TestCaseJson {
+public class TestCaseDTO {
     private String name;
-    private TestStepJson[] step;
+    private TestStepDTO[] step;
 
     @Override
     public String toString() {
@@ -18,11 +18,11 @@ public class TestCaseJson {
         this.name = name;
     }
 
-    public TestStepJson[] getStep() {
+    public TestStepDTO[] getStep() {
         return step;
     }
 
-    public void setStep(TestStepJson[] step) {
+    public void setStep(TestStepDTO[] step) {
         this.step = step;
     }
 }

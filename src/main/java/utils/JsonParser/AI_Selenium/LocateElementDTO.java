@@ -1,6 +1,6 @@
 package utils.JsonParser.AI_Selenium;
 
-public class LocateElementJson {
+public class LocateElementDTO {
     private String by;
     private String value;
 

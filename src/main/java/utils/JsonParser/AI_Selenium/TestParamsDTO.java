@@ -1,9 +1,9 @@
 package utils.JsonParser.AI_Selenium;
 
-public class TestParams {
+public class TestParamsDTO {
     private String browser;
     private String URL;
-    private TestSuiteJson testsuite;
+    private TestSuiteDTO testsuite;
 
 
     @Override
@@ -29,11 +29,11 @@ public class TestParams {
         this.URL = URL;
     }
 
-    public TestSuiteJson getTestsuite() {
+    public TestSuiteDTO getTestsuite() {
         return testsuite;
     }
 
-    public void setTestsuite(TestSuiteJson testsuite) {
+    public void setTestsuite(TestSuiteDTO testsuite) {
         this.testsuite = testsuite;
     }
 }
