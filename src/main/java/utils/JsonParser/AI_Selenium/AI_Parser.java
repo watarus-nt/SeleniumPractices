@@ -1,6 +1,7 @@
 package utils.JsonParser.AI_Selenium;
 
 import com.google.gson.Gson;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -50,6 +51,7 @@ public class AI_Parser {
     public int getNumberOfTestStepInTestCase(TestCaseDTO testCaseDTO){
         return testCaseDTO.getStep().length;
     }
+
     public static void main(String[] args) throws FileNotFoundException {
         AI_Parser p = new AI_Parser();
         p.printTestSuiteDetails();
@@ -74,6 +76,7 @@ public class AI_Parser {
                 System.out.println("\t\t" + (k + 1) + ". Name: " + testStepDTO.getName());
                 System.out.println("\t\t" + (k + 2) + ". Action: " + testStepDTO.getAction());
                 System.out.println("\t\t" + (k + 3) + ". Locate Element By: " + testStepDTO.getLocateElement().getBy());
+//                System.out.println("\t\t" + (k + 4) + ". Locate Element Value: " + handleEscapeCharacters(testStepDTO.getLocateElement().getValue()));
                 System.out.println("\t\t" + (k + 4) + ". Locate Element Value: " + testStepDTO.getLocateElement().getValue());
                 if (testStepDTO.getTexttoWrite() != null){
                 System.out.println("\t\t" + (k + 5) + ". Text To Write: " + testStepDTO.getTexttoWrite());}
@@ -162,4 +165,6 @@ public class AI_Parser {
     public void setLocateElementDTO(LocateElementDTO locateElementDTO) {
         this.locateElementDTO = locateElementDTO;
     }
+
+
 }

@@ -96,7 +96,8 @@
               "locateElement": {
                 "by": "id",
                 "value": "confirm-text"
-              }
+              },
+              "texttoWrite": "echo dot"
             }
           ]
         }

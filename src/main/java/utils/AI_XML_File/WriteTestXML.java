@@ -26,6 +26,7 @@ public class WriteTestXML {
     private String testSuiteFolderName;
     private String testClassFolderName;
     private String testNgXmlPath;
+    private String browser;
     private Document doc;
 
     public WriteTestXML() {
@@ -49,6 +50,8 @@ public class WriteTestXML {
     public void getInfoFromJson() throws Exception {
         AI_Parser parser = new AI_Parser();
         setTestSuiteName(parser.getTestSuiteName());
+
+        setBrowser(parser.getBrowser());;
 
         //Get testcases list
         for (int i = 0; i < parser.getNumberOfTestCases(); i++) {
@@ -99,11 +102,18 @@ public class WriteTestXML {
             Element testElement = doc.createElement("test");
             testElement.setAttribute("name", test);
             testElement.setAttribute("preserve-order", "true");
+            addTestParam(testElement, "browser", getBrowser());
             addClassName(testElement, test);
             rootElement.appendChild(testElement);
         }
     }
 
+    public void addTestParam(Element testElement, String name, String value){
+        Element param = doc.createElement("parameter");
+        param.setAttribute("name", name);
+        param.setAttribute("value", value);
+        testElement.appendChild(param);
+    }
     public void addClassName(Element testElement, String className){
         Element classesElement = doc.createElement("classes");
         Element classElement = doc.createElement("class");
@@ -177,5 +187,13 @@ public class WriteTestXML {
 
     public void setTestNgXmlPath(String testNgXmlPath) {
         this.testNgXmlPath = testNgXmlPath;
+    }
+
+    public String getBrowser() {
+        return browser;
+    }
+
+    public void setBrowser(String browser) {
+        this.browser = browser;
     }
 }

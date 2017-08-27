@@ -1,5 +1,6 @@
 package utils;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import utils.Logs.Log;
 
 import java.io.*;
@@ -154,5 +155,9 @@ public class Utility {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static String handleEscapeCharacters(String input){
+        return StringEscapeUtils.escapeJava(input);
     }
 }

@@ -74,6 +74,41 @@ public class SeleniumKeywords extends DriverBase {
         return driver.getCurrentUrl().contains(expectedString);
     }
 
+    public By getByLocator(String byLocatorMethod, String locatorValue) throws Exception {
+        log.info("Starting keyword click with "
+                + "byLocatorMethod = \"" + byLocatorMethod + "\""
+                + "locatorValue = \"" + locatorValue + "\"");
+
+        By locator = null;
+        try {
+            switch (byLocatorMethod.toLowerCase()) {
+                case "id":
+                    locator = By.id(locatorValue);
+                    break;
+                case "xpath":
+                    locator = By.xpath(locatorValue);
+                    break;
+                case "cssSelector":
+                    locator = By.cssSelector(locatorValue);
+                    break;
+                case "name":
+                    locator = By.name(locatorValue);
+                    break;
+                case "classname":
+                    locator = By.className(locatorValue);
+                    break;
+                default:
+                    log.fail("[FAILED] - getByLocator wrong locator method!");
+                    throw new Exception("[FAILED] - click - wrong locator method: \"" + byLocatorMethod + "\"!");
+            }
+        } catch (Exception ex){
+            log.fail("[FAILED] - getByLocator - Exception occurs: " + ex);
+            throw ex;
+        }
+        log.info("[PASSED] - getByLocator ran succesfully!");
+        return locator;
+    }
+
     public WebElement find_Element(By elementLocator) {
         WebElement returnElement = null;
         try {
@@ -110,6 +145,24 @@ public class SeleniumKeywords extends DriverBase {
         }
     }
 
+    public void click(String byLocatorMethod, String locatorValue) throws Exception {
+        log.info("Starting keyword click with "
+                + "byLocatorMethod = \"" + byLocatorMethod + "\""
+                + "locatorValue = \"" + locatorValue + "\"");
+        try {
+            By locator = getByLocator(byLocatorMethod, locatorValue);
+            if (locator != null) {
+                click(locator);
+            } else {
+                log.fail("[FAILED] - input locator is null!");
+                throw new Exception("[FAILED] - click - input is null!");
+            }
+            log.info("[PASSED] - click - Clicked to element!");
+        } catch (Exception ex) {
+            log.fail("[FAILED] - click - Unable to click to element!");
+            throw ex;
+        }
+    }
 
     public void submit(By elementLocator) {
         try {
@@ -127,6 +180,22 @@ public class SeleniumKeywords extends DriverBase {
         log.info("Starting keyword type_Text with input: \"" + text + "\"");
         try {
             WebElement textBox = find_Element(elementLocator);
+            textBox.clear();
+            textBox.sendKeys(text);
+            log.info("[PASSED] - type_Text - Type text succesfully!");
+        } catch (Exception ex) {
+            log.fail("[FAILED] - type_Text - Exception occur: \n" + ex);
+            throw ex;
+        }
+    }
+
+    public void type_Text(String byLocatorMethod, String locatorValue, String text) throws Exception {
+        log.info("Starting keyword type_Text with input: " +
+                "byLocatorMethod = \"" + byLocatorMethod + "\", "
+                + "locatorValue = \"" + locatorValue + "\", "
+                + "text =\"" + text + "\"");
+        try {
+            WebElement textBox = find_Element(getByLocator(byLocatorMethod, locatorValue));
             textBox.clear();
             textBox.sendKeys(text);
             log.info("[PASSED] - type_Text - Type text succesfully!");

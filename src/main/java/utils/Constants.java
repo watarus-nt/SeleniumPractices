@@ -1,11 +1,11 @@
 package utils;
 
 public class Constants {
-    public static final String INTERNET_EXPLORER_DRIVER = "InternetExplorerDriver";
-    public static final String EDGE_DRIVER = "MicrosoftWebDriver";
-    public static final String FIREFOX_DRIVER = "FirefoxDriver";
-    public static final String CHROME_DRIVER = "ChromeDriver";
-    public static final String SAFARI_DRIVER = "SafariDriver";
+    public static final String INTERNET_EXPLORER_DRIVER = "InternetExplorer"; // InternetExplorerDriver
+    public static final String EDGE_DRIVER = "Microsoft"; // MicrosoftWebDriver
+    public static final String FIREFOX_DRIVER = "Firefox"; // FirefoxDriver
+    public static final String CHROME_DRIVER = "Chrome"; // ChromeDriver
+    public static final String SAFARI_DRIVER = "Safari"; // SafariDriver
     //    public static String PROJECTHOME= System.getenv("AUTOPROJECTHOME");
     public static String PROJECTHOME = "";
     public static boolean grid_enabled = false;
