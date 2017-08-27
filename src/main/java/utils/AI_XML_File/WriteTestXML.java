@@ -27,6 +27,7 @@ public class WriteTestXML {
     private String testClassFolderName;
     private String testNgXmlPath;
     private String browser;
+    private String URL;
     private Document doc;
 
     public WriteTestXML() {
@@ -52,6 +53,7 @@ public class WriteTestXML {
         setTestSuiteName(parser.getTestSuiteName());
 
         setBrowser(parser.getBrowser());;
+        setURL(parser.getURL());
 
         //Get testcases list
         for (int i = 0; i < parser.getNumberOfTestCases(); i++) {
@@ -103,6 +105,7 @@ public class WriteTestXML {
             testElement.setAttribute("name", test);
             testElement.setAttribute("preserve-order", "true");
             addTestParam(testElement, "browser", getBrowser());
+            addTestParam(testElement, "URL", getURL());
             addClassName(testElement, test);
             rootElement.appendChild(testElement);
         }
@@ -195,5 +198,13 @@ public class WriteTestXML {
 
     public void setBrowser(String browser) {
         this.browser = browser;
+    }
+
+    public String getURL() {
+        return URL;
+    }
+
+    public void setURL(String URL) {
+        this.URL = URL;
     }
 }

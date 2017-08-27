@@ -1,5 +1,5 @@
 {
-    "browser": "Firefox",
+    "browser": "Chrome",
     "URL": "https://www.amazon.com/",
     "testsuite": {
       "name": "BuyTheItem",

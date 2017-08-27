@@ -106,12 +106,14 @@ public class WriteScriptFile {
     }
 
     private List<String> initialSetUpPart(){
-        this.setUpPart.add("\t@Parameters({\"browser\"})");
+        this.setUpPart.add("\t@Parameters({\"browser\", \"URL\"})");
         this.setUpPart.add("\t@BeforeTest");
-        this.setUpPart.add("\tpublic void setUp(String browser) throws Exception {");
+        this.setUpPart.add("\tpublic void setUp(String browser, String URL) throws Exception {");
         this.setUpPart.add("\t\tlog = Utility.createLog(this.getClass().getSimpleName());");
         this.setUpPart.add("\t\tdriver = WebDriverManager.createWebDriver(browser, log);");
         this.setUpPart.add("\t\tseleniumKeywords = new SeleniumKeywords(driver, log);");
+        this.setUpPart.add("\t\tseleniumKeywords.open_Url(URL);");
+
         this.setUpPart.add("\t}");
         this.setUpPart.add("");
         return getSetUpPart();
@@ -119,7 +121,7 @@ public class WriteScriptFile {
 
     private List<String> initialTestPart(TestCaseDTO testCaseDTO){
         this.testPart.add("\t@Test");
-        this.testPart.add("\tpublic void testName() throws Exception {");
+        this.testPart.add("\tpublic void " + testCaseDTO.getName().toLowerCase().trim() + "() throws Exception {");
         this.testPart.addAll(initialTestStepPart(testCaseDTO));
         this.testPart.add("\t}");
         this.testPart.add("");
