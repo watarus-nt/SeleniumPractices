@@ -11,7 +11,7 @@ import utils.Logs.Log;
 import utils.Utility;
 
 
-public class PurchaseFormTest {
+public class PurchaseFormThirdPartyTest {
     Log log;
     private WebDriver driver;
     private PurchaseForm purchaseFormTest;
@@ -20,24 +20,16 @@ public class PurchaseFormTest {
     @BeforeTest
     public void setUp() throws Exception {
         log = Utility.createLog(this.getClass().getSimpleName());
-        driver = WebDriverManager.createWebDriver("ChromeDriver", log);
+//        driver = WebDriverManager.createWebDriver("ChromeProxy", log);
+        driver = WebDriverManager.createWebDriver("FirefoxProxy", log);
         seleniumKeywords = new SeleniumKeywords(driver, log);
         purchaseFormTest = new PurchaseForm(seleniumKeywords);
     }
 
-    @Test
-    public void perfectWorldTest() throws Exception {
-        purchaseFormTest.purchaseTest("perfect-world");
-    }
+    @Test//(invocationCount = 20)
+    public void thirdPartyTest() throws Exception {
+        purchaseFormTest.purchaseTest("3rd-party-links");
 
-    @Test
-    public void slowAjaxTest() throws Exception {
-        purchaseFormTest.purchaseTest("slow-ajax");
-    }
-
-    @Test
-    public void slowAnimationTest() throws Exception {
-        purchaseFormTest.purchaseTest("slow-animation");
     }
 
     @AfterTest

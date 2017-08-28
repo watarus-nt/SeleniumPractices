@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.Logs.Log;
 
@@ -303,5 +304,26 @@ public class SeleniumKeywords extends DriverBase {
         this.wait = wait;
     }
 
+    /**
+     * Choose the option of select tag through the label (visible text)
+     *
+     * @param sObject Xpath location to selected object
+     * @param label   Text of option being selected
+     * @throws Exception
+     */
+    public static void selectDropDownListOptionByLabel(String sObject, String label) throws Exception {
+        try {
+            if (label != "") {
+                log.info("Starting keyword selectDropDownListOptionByLabel ...");
+
+                Select select = new Select(driver.findElement(By.xpath(sObject)));
+                select.selectByVisibleText(label);
+            }
+        } catch (Exception ex) {
+            log.fail("[FAILED] - selectDropDownListOptionByLabel - Exception occurred:\n" + ex);
+            throw ex;
+        }
+        log.info("[PASSED] - selectDropDownListOptionByLabel ran succesfully!");
+    }
 
 }

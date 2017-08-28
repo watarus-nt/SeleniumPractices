@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Regression Test" verbose="2">
-    <test name="PurchaseForm" preserve-order="true">
+    <test name="PurchaseFormPerfectWorldTest" preserve-order="true">
         <classes>
-            <class name="Practices.PurchaseFormTest"/>
+            <class name="Practices.PurchaseFormPerfectWorldTest"/>
+        </classes>
+    </test>
+    <test name="PurchaseFormSlowAjaxTest" preserve-order="true">
+        <classes>
+            <class name="Practices.PurchaseFormSlowAjaxTest"/>
+        </classes>
+    </test>
+    <test name="PurchaseFormAnimationTest" preserve-order="true">
+        <classes>
+            <class name="Practices.PurchaseFormAnimationTest"/>
+        </classes>
+    </test>
+    <test name="PurchaseFormThirdPartyTest" preserve-order="true">
+        <classes>
+            <class name="Practices.PurchaseFormThirdPartyTest"/>
         </classes>
     </test>
 </suite>

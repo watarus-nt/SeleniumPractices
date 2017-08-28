@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -33,7 +34,7 @@ public class WebDriverManager {
         try {
 //			driver = createWebDriver(type, log, "yes");
             driver = createWebDriver(type, log, "no");
-
+            driver.manage().window().maximize();
         } catch (Exception ex) {
             ex.printStackTrace();
             log.fail("[FAILED] createWebDriver - Exception occurred", ex);
@@ -64,19 +65,25 @@ public class WebDriverManager {
             log.info("Grid is disabled");
 
             try {
-                if (Constants.INTERNET_EXPLORER_DRIVER.equalsIgnoreCase(browserType.trim())) {
+                if (containsIgnoreCase(browserType.trim(), Constants.INTERNET_EXPLORER_DRIVER)) {
                     WebDriver webDriver = initialInternetExplorer();
                     return webDriver;
-                } else if (Constants.EDGE_DRIVER.equalsIgnoreCase(browserType.trim())) {
+                } else if (containsIgnoreCase(browserType.trim(), Constants.EDGE_DRIVER)) {
                     System.setProperty("webdriver.edge.driver", ieDriverPath);
                     WebDriver webDriver = new EdgeDriver();
                     return webDriver;
-                } else if (Constants.FIREFOX_DRIVER.equalsIgnoreCase(browserType.trim())) {
-                    WebDriver webDriver = initialFirefoxDriver();
-                    return webDriver;
-                } else if (Constants.CHROME_DRIVER.equalsIgnoreCase(browserType.trim())) {
-                    WebDriver webDriver = initialChromeDriverWithProxy();
-                    return webDriver;
+                } else if (containsIgnoreCase(browserType.trim(), Constants.FIREFOX_DRIVER)) {
+                    if (browserType.trim().toLowerCase().contains("proxy")) {
+                        return initialFirefoxDriverWithProxy();
+                    } else {
+                        return initialFirefoxDriver();
+                    }
+                } else if (containsIgnoreCase(browserType.trim(), Constants.CHROME_DRIVER)) {
+                    if (browserType.trim().toLowerCase().contains("proxy")) {
+                        return initialChromeDriverWithProxy();
+                    } else {
+                        return initialChromeDriverWithoutProxy();
+                    }
                 }
 
             } catch (Exception ex) {
@@ -99,6 +106,15 @@ public class WebDriverManager {
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         return new FirefoxDriver(capabilities);
+    }
+
+    public static WebDriver initialFirefoxDriverWithProxy() {
+        System.setProperty("webdriver.gecko.driver", firefoxDriverPath);
+        FirefoxProfile profile = new FirefoxProfile();
+        profile.setPreference("network.proxy.type", 1);
+        profile.setPreference("network.proxy.http", "10.10.10.10");
+        profile.setPreference("network.proxy.http_port", 8080);
+        return new FirefoxDriver(profile);
     }
 
     private static WebDriver initialChromeDriverWithProxy() {
