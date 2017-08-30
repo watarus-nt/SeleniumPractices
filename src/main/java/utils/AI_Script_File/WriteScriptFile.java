@@ -156,8 +156,8 @@ public class WriteScriptFile {
         String locatorValue = testStepDTO.getLocateElement().getValue();
         actionString += ", \"" + Utility.handleEscapeCharacters(locatorValue) + "\"";
 
-        if (testStepDTO.getTexttoWrite() != null){
-            actionString += ", \"" + testStepDTO.getTexttoWrite() + "\");";
+        if (testStepDTO.getThirdPara() != null) {
+            actionString += ", \"" + testStepDTO.getThirdPara() + "\");";
         } else {
             actionString += ");";
         }

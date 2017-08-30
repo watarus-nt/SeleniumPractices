@@ -4,14 +4,14 @@ public class TestStepDTO {
     private String name;
     private String action;
     private LocateElementDTO locateElement;
-    private String texttoWrite;
+    private String thirdPara;
 
     @Override
     public String toString() {
         return "TestStep name: " + name + "\n"
                 + "Action name: " + action + "\n"
                 + locateElement + "\n"
-                + texttoWrite;
+                + thirdPara;
 
     }
 
@@ -39,11 +39,11 @@ public class TestStepDTO {
         this.locateElement = locateElement;
     }
 
-    public String getTexttoWrite() {
-        return texttoWrite;
+    public String getThirdPara() {
+        return thirdPara;
     }
 
-    public void setTexttoWrite(String texttoWrite) {
-        this.texttoWrite = texttoWrite;
+    public void setThirdPara(String thirdPara) {
+        this.thirdPara = thirdPara;
     }
 }

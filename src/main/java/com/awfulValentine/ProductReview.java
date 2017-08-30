@@ -117,31 +117,36 @@ public class ProductReview {
         seleniumKeywords.submit(By.name("submit"));
     }
 
-    public void verifyPostedComment(WebDriver driver) {
+    public void verifyPostedComment(WebDriver driver) throws Exception {
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.urlContains("#comment-"));
+        Boolean verifyResult = true;
         try {
 //            WebElement userComment_Name = driver.findElement(By.partialLinkText(websiteUrl));
             WebElement userComment_Name = driver.findElement(By.xpath("//*[contains(@id,\"li-comment-\")][last()]//span/a"));
 
-            if (seleniumKeywords.verifyElementTextEndsWith(userComment_Name, nameText)) {
-                DriverBase.log.info("PASSED - Correct comment's username is showed on the page!");
-            } else {
-                System.out.println("FAILED - Incorrect comment's username!");
-            }
+            seleniumKeywords.verifyElementTextEndsWith(userComment_Name, nameText);
+            DriverBase.log.info("PASSED - Correct comment's username is showed on the page!");
+        } catch (Exception ex) {
+            DriverBase.log.fail("FAILED - Incorrect comment's username!");
+            verifyResult = false;
+            throw ex;
+        }
 
             WebElement userComment_Content = driver.findElement(By.xpath("//*[contains(@id,\"li-comment-\")][last()]//p"));
-            if (seleniumKeywords.verifyElementTextEqual(userComment_Content, commentText)) {
+        try {
+            seleniumKeywords.verifyElementTextEqual(userComment_Content, commentText);
                 DriverBase.log.info("PASSED - Correct comment content is showed!");
-            } else {
-                System.out.println("FAILED - Incorrect comment content is showed!");
-            }
         } catch (Exception ex) {
-            System.out.println("FAILED when verifying posted comment!");
-            ex.printStackTrace();
+            verifyResult = false;
+            DriverBase.log.fail("FAILED - Incorrect comment content is showed!");
+            throw ex;
         }
-//        driver.quit();
+        if (!verifyResult) {
+            DriverBase.log.fail("FAILED when verifying posted comment!");
+        }
+
     }
 
     public String getNameText() {

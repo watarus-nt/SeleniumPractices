@@ -20,7 +20,7 @@ public class ProductReviewTest {
     @BeforeTest
     public void setUp() throws Exception {
         log = Utility.createLog(this.getClass().getSimpleName());
-        driver = WebDriverManager.createWebDriver("ChromeDriver", log);
+        driver = WebDriverManager.createWebDriver("InternetExplorer", log);
         seleniumKeywords = new SeleniumKeywords(driver, log);
         productReview = new ProductReview(seleniumKeywords);
     }

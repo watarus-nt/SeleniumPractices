@@ -1,7 +1,6 @@
 package utils.JsonParser.AI_Selenium;
 
 import com.google.gson.Gson;
-import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -78,8 +77,9 @@ public class AI_Parser {
                 System.out.println("\t\t" + (k + 3) + ". Locate Element By: " + testStepDTO.getLocateElement().getBy());
 //                System.out.println("\t\t" + (k + 4) + ". Locate Element Value: " + handleEscapeCharacters(testStepDTO.getLocateElement().getValue()));
                 System.out.println("\t\t" + (k + 4) + ". Locate Element Value: " + testStepDTO.getLocateElement().getValue());
-                if (testStepDTO.getTexttoWrite() != null){
-                System.out.println("\t\t" + (k + 5) + ". Text To Write: " + testStepDTO.getTexttoWrite());}
+                if (testStepDTO.getThirdPara() != null) {
+                    System.out.println("\t\t" + (k + 5) + ". Text To Write: " + testStepDTO.getThirdPara());
+                }
 
             }
 
@@ -110,7 +110,7 @@ public class AI_Parser {
         System.out.println(params[0].getTestsuite().getTestcase()[0].getStep()[0].getAction());
         System.out.println(params[0].getTestsuite().getTestcase()[0].getStep()[0].getLocateElement().getBy());
         System.out.println(params[0].getTestsuite().getTestcase()[0].getStep()[0].getLocateElement().getValue());
-        System.out.println(params[0].getTestsuite().getTestcase()[0].getStep()[0].getTexttoWrite());*/
+        System.out.println(params[0].getTestsuite().getTestcase()[0].getStep()[0].getThirdPara());*/
 
         TestParamsDTO params = gson.fromJson(new FileReader("sampleAItest.json"), TestParamsDTO.class);
         System.out.println(params.getBrowser());
@@ -123,7 +123,7 @@ public class AI_Parser {
         System.out.println(params.getTestsuite().getTestcase()[0].getStep()[0].getAction());
         System.out.println(params.getTestsuite().getTestcase()[0].getStep()[0].getLocateElement().getBy());
         System.out.println(params.getTestsuite().getTestcase()[0].getStep()[0].getLocateElement().getValue());
-        System.out.println(params.getTestsuite().getTestcase()[0].getStep()[0].getTexttoWrite());
+        System.out.println(params.getTestsuite().getTestcase()[0].getStep()[0].getThirdPara());
     }
 
     public TestParamsDTO getTestParamsDTO() {

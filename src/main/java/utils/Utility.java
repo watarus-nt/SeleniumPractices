@@ -6,6 +6,7 @@ import utils.Logs.Log;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -160,4 +161,20 @@ public class Utility {
     public static String handleEscapeCharacters(String input){
         return StringEscapeUtils.escapeJava(input);
     }
+
+    public static List<String> readFileLineByLine(String filename) throws IOException {
+        FileInputStream fis = new FileInputStream(filename);
+        //Construct BufferedReader from InputStreamReader
+        BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+        List<String> res = new ArrayList<String>();
+        //List<String> re = new ArrayList<String>();
+
+        String line = null;
+        while ((line = br.readLine()) != null) {
+            res.add(line);
+        }
+        br.close();
+        return res;
+    }
+
 }

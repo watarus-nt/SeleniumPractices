@@ -76,7 +76,7 @@ public class SeleniumKeywords extends DriverBase {
     }
 
     public By getByLocator(String byLocatorMethod, String locatorValue) throws Exception {
-        log.info("Starting keyword click with "
+        log.info("Starting keyword getByLocator with "
                 + "byLocatorMethod = \"" + byLocatorMethod + "\""
                 + "locatorValue = \"" + locatorValue + "\"");
 
@@ -207,25 +207,115 @@ public class SeleniumKeywords extends DriverBase {
     }
 
 
-    public Boolean verifyElementTextEqual(WebElement element, String expectedText) {
+    public void verifyElementTextEqual(WebElement element, String expectedText) throws Exception {
         log.info("verifyElementTextEqual - Element text is: \"" + element.getText()
                 + "\"");
-        log.info("verifyElementTextEqual - expectedText is: \"" + expectedText);
-        if (element.getText().equals(expectedText)) {
-            return true;
-        } else {
-            return false;
+        log.info("verifyElementTextEqual - expected Text is: \"" + expectedText);
+        try {
+            if (element.getText().equals(expectedText)) {
+                log.info("[PASSED] - verifyElementTextEqual - Element text matches input text!");
+            } else {
+                throw new Exception("[FAILED] - verifyElementTextEqual - Element text doesn't match input text!");
+            }
+        } catch (Exception ex) {
+            log.fail("[FAILED] - Exception occurs\n" + ex);
+            throw ex;
         }
     }
 
-    public Boolean verifyElementTextEndsWith(WebElement element, String expectedText) {
+    public void verifyElementTextEqual(String byLocatorMethod, String locatorValue, String expectedText) throws Exception {
+        log.info("Starting verifyElementTextEqual with input: " +
+                "byLocatorMethod = \"" + byLocatorMethod + "\", "
+                + "locatorValue = \"" + locatorValue + "\", "
+                + "text =\"" + expectedText + "\"");
+        try {
+            WebElement element = find_Element(getByLocator(byLocatorMethod, locatorValue));
+            log.info("verifyElementTextEqual - Element text is: \"" + element.getText()
+                    + "\"");
+            log.info("verifyElementTextEqual - expected Text is: \"" + expectedText);
+            if (element.getText().equals(expectedText)) {
+                log.info("[PASSED] - verifyElementTextEqual - Element text matches input text!");
+            } else {
+                throw new Exception("[FAILED] - verifyElementTextEqual - Element text doesn't match input text!");
+            }
+        } catch (Exception ex) {
+            log.fail("[FAILED] - Exception occurs\n" + ex);
+            throw ex;
+        }
+    }
+
+    public void verifyElementTextContains(WebElement element, String expectedContainsText) throws Exception {
+        log.info("verifyElementTextContains - Element text is: \"" + element.getText()
+                + "\"");
+        log.info("verifyElementTextContains - expectedContainsText is: \"" + expectedContainsText);
+        try {
+            if (element.getText().contains(expectedContainsText)) {
+                log.info("[PASSED] - verifyElementTextContains - Element text contains input text!");
+            } else {
+                throw new Exception("[FAILED] - verifyCurrentUrlContains - Element text doesn't contains input text!");
+            }
+        } catch (Exception ex) {
+            log.fail("[FAILED] - Exception occurs\n" + ex);
+            throw ex;
+        }
+    }
+
+    public void verifyElementTextContains(String byLocatorMethod, String locatorValue, String expectedContainsText) throws Exception {
+        log.info("Starting verifyElementTextContains with input: " +
+                "byLocatorMethod = \"" + byLocatorMethod + "\", "
+                + "locatorValue = \"" + locatorValue + "\", "
+                + "text =\"" + expectedContainsText + "\"");
+        try {
+            WebElement element = find_Element(getByLocator(byLocatorMethod, locatorValue));
+            log.info("verifyElementTextContains - Element text is: \"" + element.getText()
+                    + "\"");
+            log.info("verifyElementTextContains - expected Text is: \"" + expectedContainsText);
+            if (element.getText().contains(expectedContainsText)) {
+                log.info("[PASSED] - verifyElementTextContains - Element text contains input text!");
+            } else {
+                throw new Exception("[FAILED] - verifyElementTextContains - Element text doesn't contain input text!");
+            }
+        } catch (Exception ex) {
+            log.fail("[FAILED] - Exception occurs\n" + ex);
+            throw ex;
+        }
+    }
+
+
+    public void verifyElementTextEndsWith(WebElement element, String expectedText) throws Exception {
         log.info("verifyElementTextEndsWith - Element text is: \"" + element.getText()
                 + "\"");
         log.info("verifyElementTextEndsWith - expectedText is: \"" + expectedText);
-        if (element.getText().endsWith(expectedText)) {
-            return true;
-        } else {
-            return false;
+        try {
+            if (element.getText().endsWith(expectedText)) {
+                log.info("[PASSED] - verifyElementTextEndsWith - Element text ends with input text!");
+            } else {
+                throw new Exception("[FAILED] - verifyElementTextEndsWith - Element text doesn't end with input text!");
+            }
+        } catch (Exception ex) {
+            log.fail("[FAILED] - Exception occurs\n" + ex);
+            throw ex;
+        }
+    }
+
+    public void verifyElementTextEndsWith(String byLocatorMethod, String locatorValue, String expectedText) throws Exception {
+        log.info("Starting verifyElementTextEndsWith with input: " +
+                "byLocatorMethod = \"" + byLocatorMethod + "\", "
+                + "locatorValue = \"" + locatorValue + "\", "
+                + "text =\"" + expectedText + "\"");
+        try {
+            WebElement element = find_Element(getByLocator(byLocatorMethod, locatorValue));
+            log.info("verifyElementTextEndsWith - Element text is: \"" + element.getText()
+                    + "\"");
+            log.info("verifyElementTextEndsWith - expected Text is: \"" + expectedText);
+            if (element.getText().endsWith(expectedText)) {
+                log.info("[PASSED] - verifyElementTextEndsWith - Element text ends with input text!");
+            } else {
+                throw new Exception("[FAILED] - verifyElementTextEndsWith - Element text doesn't end with input text!");
+            }
+        } catch (Exception ex) {
+            log.fail("[FAILED] - Exception occurs\n" + ex);
+            throw ex;
         }
     }
 
@@ -311,12 +401,27 @@ public class SeleniumKeywords extends DriverBase {
      * @param label   Text of option being selected
      * @throws Exception
      */
-    public static void selectDropDownListOptionByLabel(String sObject, String label) throws Exception {
+    public void selectDropDownListOptionByLabel(String sObject, String label) throws Exception {
         try {
             if (label != "") {
                 log.info("Starting keyword selectDropDownListOptionByLabel ...");
 
                 Select select = new Select(driver.findElement(By.xpath(sObject)));
+                select.selectByVisibleText(label);
+            }
+        } catch (Exception ex) {
+            log.fail("[FAILED] - selectDropDownListOptionByLabel - Exception occurred:\n" + ex);
+            throw ex;
+        }
+        log.info("[PASSED] - selectDropDownListOptionByLabel ran succesfully!");
+    }
+
+    public void selectDropDownListOptionByLabel(String byLocatorMethod, String locatorValue, String label) throws Exception {
+        try {
+            if (label != "") {
+                log.info("Starting keyword selectDropDownListOptionByLabel ...");
+
+                Select select = new Select(find_Element(getByLocator(byLocatorMethod, locatorValue)));
                 select.selectByVisibleText(label);
             }
         } catch (Exception ex) {
